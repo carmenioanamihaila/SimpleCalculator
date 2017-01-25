@@ -15,7 +15,7 @@ class Calculator
      */
     static function add($first_operand, $second_operand)
     {
-       return $first_operand + $second_operand;
+        return $first_operand + $second_operand;
     }
 
     /*
