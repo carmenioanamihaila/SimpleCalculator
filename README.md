@@ -20,7 +20,11 @@ The application has a simple controller with one entry action that creates and
 handles the form with 2 inputs (which are validated as integers) and 3 buttons 
 for each available operation (plus, multiplication and division).
 
-I created an extra class for handling the 3 operations, taking into consideration 
-the case for division by 0, in which case an exception will be thrown.
+I created a class (SimpleCalculator) for handling the 3 operations, taking into consideration 
+the case for division by 0, in which case an exception will be thrown. The class 
+implements an Interface which should be a model, in case I want other implementations 
+for Calculator. I also create a Factory class that will just create an object of 
+SimpleCalculator class.
 
-I also created some basic unit tests for each operation.
+I also created some basic unit tests for each operation for class SimpleCalculator 
+and a test class for the Factory, which will test the creation of the SimpleCalculator.

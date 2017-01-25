@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
 use AppBundle\Calculator;
+use AppBundle\CalculatorPackage\CalculatorFactory;
 
 class DefaultController extends Controller
 {
@@ -23,16 +24,16 @@ class DefaultController extends Controller
         $data = $request->request->get('form');
         $form = $this->createCalculatorForm($data);
         $result = "";
-        //handle the submit 
-        $form->handleRequest($request);
+        $form->handleRequest($request);         //handle the submit 
         if ($form->isSubmitted() && $form->isValid()) {   
+            $calculator = CalculatorFactory::create();
             try {
                 if ($form->get('add')->isClicked()) { //plus operation
-                    $result = Calculator::add($data['first_number'], $data['second_number']);
+                    $result = $calculator->plus($data['first_number'], $data['second_number']);
                 } else if ($form->get('divide')->isClicked()) { //divide operation
-                    $result = Calculator::divide($data['first_number'], $data['second_number']);
+                    $result = $calculator->divide($data['first_number'], $data['second_number']);
                 } else if ($form->get('multiply')->isClicked()) { //multiply operation
-                    $result = Calculator::multiply($data['first_number'], $data['second_number']);
+                    $result = $calculator->multiply($data['first_number'], $data['second_number']);
                 }
             } catch (\Exception $e) {
                 $form->addError(new FormError($e->getMessage()));
