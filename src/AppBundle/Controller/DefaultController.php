@@ -27,11 +27,11 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {   
             try {
-                if ($form->get('add')->isClicked()) {
+                if ($form->get('add')->isClicked()) { //plus operation
                     $result = Calculator::add($data['first_number'], $data['second_number']);
-                } else if ($form->get('divide')->isClicked()) {
+                } else if ($form->get('divide')->isClicked()) { //divide operation
                     $result = Calculator::divide($data['first_number'], $data['second_number']);
-                } else if ($form->get('multiply')->isClicked()) {
+                } else if ($form->get('multiply')->isClicked()) { //multiply operation
                     $result = Calculator::multiply($data['first_number'], $data['second_number']);
                 }
             } catch (\Exception $e) {
@@ -39,7 +39,7 @@ class DefaultController extends Controller
             }
         }
         return $this->render('default/index.html.twig', array(
-           'form' => $form->createView(), 'result' => $result
+            'form' => $form->createView(), 'result' => $result
         ));
    }
    
@@ -51,7 +51,7 @@ class DefaultController extends Controller
     */
    private function createCalculatorForm($data) 
    {
-       return $this->createFormBuilder($data, array(
+        return $this->createFormBuilder($data, array(
             'action' => $this->generateUrl('calculator'),
         ))
         ->add('first_number',  IntegerType::class, array('required' => true))
